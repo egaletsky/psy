@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>HTML5</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+ <body>
+{% verbatim %}
+  <div id="vue">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                man date:<input type="date" v-model="man_date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                woman date:<input type="date" v-model="woman_date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+                <button v-on:click="getAnswer">Получить информацию</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<hr align="left" width="300" size="4" color="#ff9900" />
+  <p>{{ quest }}</p>
+<hr align="left" width="300" size="4" color="#ff9900" />
+   <p>{{ answer }}</p>
+
+</div>
+<script>
+
+
+var app = new Vue({
+  el: '#vue',
+  data: {
+   man_date: '1980-02-18',
+   woman_date:'1980-09-30',
+   quest: 'ff',
+   answer: 'ff'
+  },
+  methods: {
+    getAnswer: function () {
+      req = { "man_date": this.man_date.replace(/-/g,"."), "woman_date": this.woman_date.replace(/-/g,".")}
+      this.quest = req
+
+      axios.post('/api/articles/', req)
+        .then((response) => {
+        console.log(response);
+        this.answer = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+    }
+  }
+})
+</script>
+{% endverbatim %}
+ </body>
+</html>

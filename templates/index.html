@@ -1,60 +1,83 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset="utf-8" />
-  <title>HTML5</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!doctype html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="icon" href="{% static "images/favicon.ico" %}">
+
+    <title>Совместимость</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}"/>
+
 
 </head>
- <body>
+<body class="text-center">
+<div id="vue">
+
+
+    <form class="form-signin">
+        <img class="mb-4" src="{% static "images/hearts.png" %}" alt="" width="72" height="72">
+
+        <h1 class="h3 mb-3 font-weight-normal">Даты рождения</h1>
+
+        <input type="date" v-model="man_date" id="inputMan" class="form-control" required autofocus>
+
+        <input type="date" v-model="woman_date" id="inputWoman" class="form-control" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="getAnswer">Получить ответ</button>
+
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+
 {% verbatim %}
-  <div id="vue">
-
-   man date:<input type="date" v-model="man_date" />
-	<br>
-  woman date:<input type="date" v-model="woman_date" />
-
-  <br>
-  <button v-on:click="getAnswer">Получить информацию</button>
-
-
-<hr align="left" width="300" size="4" color="#ff9900" />
-  <p>{{ quest }}</p>
-<hr align="left" width="300" size="4" color="#ff9900" />
-   <p>{{ answer }}</p>
+    <hr align="left" width="300" size="4" color="#ff9900"/>
+    <p>{{ quest }}</p>
+    <hr align="left" width="300" size="4" color="#ff9900"/>
+    <p>{{ answer }}</p>
+{% endverbatim %}
 
 </div>
+</body>
+
+
+
 <script>
+    var app = new Vue({
+        el: '#vue',
+        data: {
+            man_date: '1980-02-18',
+            woman_date: '1980-09-30',
+            quest: 'ff',
+            answer: 'ff'
+        },
+        methods: {
+            getAnswer: function () {
+                req = {"man_date": this.man_date.replace(/-/g, "."), "woman_date": this.woman_date.replace(/-/g, ".")}
+                this.quest = req
 
-
-var app = new Vue({
-  el: '#vue',
-  data: {
-   man_date: '1980-02-18',
-   woman_date:'1980-09-30',
-   quest: 'ff',
-   answer: 'ff'
-  },
-  methods: {
-    getAnswer: function () {
-      req = { "man_date": this.man_date.replace(/-/g,"."), "woman_date": this.woman_date.replace(/-/g,".")}
-      this.quest = req
-
-      axios.post('/api/articles/', req)
-        .then((response) => {
-        console.log(response);
-        this.answer = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-
-    }
-  }
-})
+                axios.post('/api/articles/', req)
+                    .then((response) => {
+                        console.log(response);
+                        this.answer = response.data;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        }
+    })
 </script>
-{% endverbatim %}
- </body>
+
+
 </html>
