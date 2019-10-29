@@ -26,7 +26,7 @@
 <div id="vue">
 
 
-    <div class="form-signin">
+    <form class="form-signin">
         <img class="mb-4" src="{% static "images/hearts.png" %}" alt="" width="72" height="72">
 
         <h1 class="h3 mb-3 font-weight-normal">Даты рождения</h1>
@@ -35,22 +35,21 @@
 
         <input type="date" v-model="woman_date" id="inputWoman" class="form-control" required>
 
+        <button class="btn btn-lg btn-primary btn-block"  v-on:click="getAnswer">Получить ответ</button>
 
-
-        {% verbatim %}
-
-            <p class="form-control">{{ quest }}</p>
-            <p class="form-control">{{ answer }}</p>
-
-        {% endverbatim %}
-
-
-                <button class="btn btn-lg btn-primary btn-block" v-on:click="getAnswer">Получить ответ</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
-    </div>
+    </form>
+
+{% verbatim %}
+    <hr align="left" width="300" size="4" color="#ff9900"/>
+    <p>{{ quest }}</p>
+    <hr align="left" width="300" size="4" color="#ff9900"/>
+    <p>{{ answer }}</p>
+{% endverbatim %}
 
 </div>
 </body>
+
 
 
 <script>
@@ -59,8 +58,8 @@
         data: {
             man_date: '1980-02-18',
             woman_date: '1980-09-30',
-            quest: 'Запрос',
-            answer: 'Ответ'
+            quest: 'ff',
+            answer: 'ff'
         },
         methods: {
             getAnswer: function () {

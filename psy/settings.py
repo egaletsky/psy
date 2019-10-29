@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'et=wpzra)!_wc_dn&6%_v)49)ftls!!fqa@w_0!g%sk!=k=xak'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','galetsky.pythonanywhere.com']
 
@@ -125,8 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR,'static')
-#]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
