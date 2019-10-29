@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'et=wpzra)!_wc_dn&6%_v)49)ftls!!fqa@w_0!g%sk!=k=xak'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','galetsky.pythonanywhere.com']
 
